@@ -1,0 +1,2 @@
+This file is part of the WillDaisey/WDUL (Windows Desktop Utility Library) project.
+View this project on github: https://github.com/WillDaisey/wdul/

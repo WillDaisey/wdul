@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{bdacc1bf-b9b0-4717-9810-e09eab7a783a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code">
+      <UniqueIdentifier>{373b368f-c15d-43d7-af63-c585e54587a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Window">
+      <UniqueIdentifier>{eac22452-9d08-4e57-9454-9746755fa4e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\System">
+      <UniqueIdentifier>{e837353c-32c5-4dd7-93fe-4d00abea6b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IO">
+      <UniqueIdentifier>{ce560a67-0c64-4a80-8a70-cf94e9c46630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Audio">
+      <UniqueIdentifier>{39add8be-9966-4d9a-8b37-502a9adeb4b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Graphics">
+      <UniqueIdentifier>{59ba4c0a-928f-4aee-8adc-cc468f617b01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\wdul\fs.hpp">
+      <Filter>Source Code\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\ini_file.hpp">
+      <Filter>Source Code\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\parse.hpp">
+      <Filter>Source Code\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\resource_interchange_file.hpp">
+      <Filter>Source Code\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\menu.hpp">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\keyboard.hpp">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\window.hpp">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\window_message.hpp">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\app_window.hpp">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\game_window.hpp">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\graphics_common.hpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\dxgi.hpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\d3d12.hpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\d3d11.hpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\d2d1.hpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\xaudio2.hpp">
+      <Filter>Source Code\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\access_control.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\com.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\console.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\counted_ptr.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\display.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\error.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\foundation.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\handle.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\media_foundation.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\memory.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\system_resource.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\thread.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\time.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="d3d11.cpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12.cpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="dxgi.cpp">
+      <Filter>Source Code\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="app_window.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="game_window.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="fs.cpp">
+      <Filter>Source Code\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="ini_file.cpp">
+      <Filter>Source Code\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="parse.cpp">
+      <Filter>Source Code\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="resource_interchange_file.cpp">
+      <Filter>Source Code\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="error.cpp">
+      <Filter>Source Code\System</Filter>
+    </ClCompile>
+    <ClCompile Include="foundation.cpp">
+      <Filter>Source Code\System</Filter>
+    </ClCompile>
+    <ClCompile Include="media_foundation.cpp">
+      <Filter>Source Code\System</Filter>
+    </ClCompile>
+    <ClCompile Include="strconv.cpp">
+      <Filter>Source Code\System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="utility\writenotice.bat">
+      <Filter>Utilities</Filter>
+    </None>
+    <None Include="include\wdul\strconv.hpp">
+      <Filter>Source Code\System</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="utility\notice.txt">
+      <Filter>Utilities</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
