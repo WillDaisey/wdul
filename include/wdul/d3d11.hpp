@@ -24,7 +24,7 @@ namespace wdul
 	template <class DevT, class DcT, std::uint32_t NumFeatureLevels>
 	void d3d11_create_device(
 		_Outptr_ DevT** const Device,
-		_Outptr_opt_ DcT** const ImmediateContext,
+		_Outptr_ DcT** const ImmediateContext,
 		_In_ IDXGIFactory6* const DxgiFactory,
 		D3D_FEATURE_LEVEL const (&FeatureLevels)[NumFeatureLevels],
 		_Out_opt_ D3D_FEATURE_LEVEL* const FeatureLevel = nullptr,
@@ -49,5 +49,32 @@ namespace wdul
 		);
 		device.as(Device);
 		immediateContext.as(ImmediateContext);
+	}
+
+	template <class DevT, std::uint32_t NumFeatureLevels>
+	void d3d11_create_device(
+		_Outptr_ DevT** const Device,
+		_In_ IDXGIFactory6* const DxgiFactory,
+		D3D_FEATURE_LEVEL const (&FeatureLevels)[NumFeatureLevels],
+		_Out_opt_ D3D_FEATURE_LEVEL* const FeatureLevel = nullptr,
+		std::uint32_t const Flags = WDUL_DEBUG_SWITCH(D3D11_CREATE_DEVICE_DEBUG, 0),
+		DXGI_GPU_PREFERENCE const GpuPreference = dxgi_default_gpu_preference,
+		bool const NoSoftwareAdapter = true,
+		std::uint32_t const SdkVersion = D3D11_SDK_VERSION
+	)
+	{
+		com_ptr<ID3D11Device> device;
+		d3d11_create_device(
+			device.put(),
+			nullptr,
+			DxgiFactory,
+			NumFeatureLevels, FeatureLevels,
+			FeatureLevel,
+			Flags,
+			GpuPreference,
+			NoSoftwareAdapter,
+			SdkVersion
+		);
+		device.as(Device);
 	}
 }
