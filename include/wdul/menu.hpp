@@ -6,34 +6,17 @@
 
 namespace wdul
 {
-	// Indicates the hierarchical level of a menu.
-	enum class menu_rank : std::uint8_t
-	{
-		// A horizontal menu bar, suitable for attaching to a top-level window.
-		// The menu bar contains a list of drop-down menus.
-		menu_bar,
-
-		// Drop-down menus are contained in the menu bar.
-		// Drop-down menus contain a list of submenus.
-		dropdown_menu,
-
-		// Submenus are contained in drop-down menus.
-		// Submenus may contain further submenus.
-		submenu,
-	};
-
-	// Specifies whether a menu is a menu bar or a popup menu.
+	/// <summary>Specifies whether a menu is a menu bar or a popup menu.</summary>
 	enum class menu_type : bool
 	{
-		// A horizontal menu bar, suitable for attaching to a top-level window.
+		/// <summary>A horizontal menu bar, suitable for attaching to a top-level window.</summary>
 		bar,
 
-		// A vertical popup menu, suitable for use as a submenu of another menu.
+		/// <summary>A vertical popup menu, suitable for use as a submenu of another menu.</summary>
 		popup,
 	};
 
-	// Traits for a handle which manages a menu handle (HMENU).
-	// See the generic_menu_handle typedef.
+	/// <summary>Traits for the <c>generic_menu_handle</c> typedef, that is, a <c>wdul::handle</c> which manages a menu handle (<c>HMENU</c>).</summary>
 	struct generic_menu_handle_traits
 	{
 		using value_type = HMENU;
@@ -45,21 +28,31 @@ namespace wdul
 		}
 	};
 
-	// Manages a handle to a menu, using DestroyMenu to clean up resources associated with the menu.
-	// Note that if the menu is assigned to a window, resources are freed automatically by the window. You must detach the
-	// menu handle from the menu_handle object when assigning it to a window.
+	/// <summary>
+	/// Manages a handle to a menu, using <c>DestroyMenu</c> to clean up resources associated with the menu.
+	/// Note that if the menu is assigned to a window, resources are freed automatically by the window. You must detach the
+	/// menu handle from the <c>generic_menu_handle</c> object when assigning it to a window.
+	/// </summary>
 	using generic_menu_handle = handle<generic_menu_handle_traits>;
 
-	// Equivalent to generic_menu_handle_traits, but provides a type-safe way of distinguishing popup menus from other menus.
+	/// <summary>
+	/// Equivalent to <c>generic_menu_handle_traits</c>, but provides a type-safe way of distinguishing popup menus from other menus.
+	/// </summary>
+	/// <typeparam name="MenuType">Specifies whether the traits are for a popup menu handle or a non-popup menu handle.</typeparam>
 	template <menu_type MenuType>
 	struct menu_handle_traits : generic_menu_handle_traits {};
 
-	// Similar to generic_menu_handle, but this type indicates the menu is not a popup menu.
+	/// <summary>
+	/// Traits for a <c>wdul::handle</c> which manages a menu handle to a menu which is not a popup menu.
+	/// </summary>
 	using menu_bar_handle = handle<menu_handle_traits<menu_type::bar>>;
 
-	// Similar to generic_menu_handle, but this type indicates the menu is a popup menu.
+	/// <summary>
+	/// Traits for a <c>wdul::handle</c> which manages a menu handle to a popup menu.
+	/// </summary>
 	using menu_popup_handle = handle<menu_handle_traits<menu_type::popup>>;
 
+	/// <summary>Flags which specify menu item state.</summary>
 	enum class menu_item_state_flags : std::uint16_t
 	{
 		none,
@@ -79,6 +72,7 @@ namespace wdul
 	};
 	WDUL_DECLARE_ENUM_FLAGS(menu_item_state_flags);
 
+	/// <summary>Flags which specify the type of menu item.</summary>
 	enum class menu_item_type_flags : std::uint16_t
 	{
 		none,
@@ -108,19 +102,22 @@ namespace wdul
 	};
 	WDUL_DECLARE_ENUM_FLAGS(menu_item_type_flags);
 
-	// Creates a menu using the CreateMenu function.
+	/// <summary>Creates an empty menu. You can use a <c>menu_item_builder</c> to insert items into the menu.</summary>
+	/// <returns>A <c>menu_bar_handle</c> which manages a handle to the new menu.</returns>
 	[[nodiscard]] inline menu_bar_handle create_menu()
 	{
 		return menu_bar_handle(check_pointer(CreateMenu()));
 	}
 
-	// Creates a popup menu using the CreatePopupMenu function.
+	/// <summary>Creates an empty popup menu, that is, a drop-down menu, submenu, or shortcut menu.</summary>
+	/// <returns>A <c>menu_popup_handle</c> which manages a handle to the new menu.</returns>
 	[[nodiscard]] inline menu_popup_handle create_popup_menu()
 	{
 		return menu_popup_handle(check_pointer(CreatePopupMenu()));
 	}
 
-	// Returns the number of items in the given menu.
+	/// <returns>The number of items in the menu specified by <paramref name="MenuHandle"/>.</returns>
+	/// <param name="MenuHandle">A handle to the menu to get the item count of.</param>
 	[[nodiscard]] inline std::uint16_t get_menu_item_count(_In_opt_ HMENU const MenuHandle)
 	{
 		std::int32_t const result = GetMenuItemCount(MenuHandle);
@@ -128,6 +125,7 @@ namespace wdul
 		return static_cast<std::uint16_t>(result);
 	}
 
+	/// <summary>Describes a menu item.</summary>
 	class menu_item_builder
 	{
 	public:
@@ -137,46 +135,63 @@ namespace wdul
 			mData.fMask = 0;
 		}
 
+		/// <summary>Sets the menu item identifier.</summary>
+		/// <param name="Id">An application defined value which identifies the menu item.</param>
 		void set_id(std::uint16_t const Id) noexcept
 		{
 			mData.fMask |= MIIM_ID;
 			mData.wID = Id;
 		}
 
+		/// <summary>Specifies that the menu item is to be displayed using the given text string.</summary>
+		/// <param name="Text">The string which specifies the text for the menu item to display.</param>
 		void set_text(_In_z_ wchar_t const* const Text) noexcept
 		{
 			mData.fMask |= MIIM_STRING;
 			mData.dwTypeData = const_cast<wchar_t*>(Text);
 		}
 
+		/// <summary>Sets the popup menu to be opened by the menu item.</summary>
+		/// <param name="PopupMenuHandle">A handle to a popup menu (drop-down menu or submenu) to be associated with the menu item.</param>
 		void set_popup(_In_ HMENU const PopupMenuHandle) noexcept
 		{
 			mData.fMask |= MIIM_SUBMENU;
 			mData.hSubMenu = PopupMenuHandle;
 		}
 
+		/// <summary>Sets a bitmap to be displayed.</summary>
+		/// <param name="BitmapHandle">A handle to the bitmap to be displayed, or a HBMMENU_* constant.</param>
 		void set_bitmap(_In_ HBITMAP const BitmapHandle) noexcept
 		{
 			mData.fMask |= MIIM_BITMAP;
 			mData.hbmpItem = BitmapHandle;
 		}
 
+		/// <summary>Sets the menu item type.</summary>
+		/// <param name="TypeFlags">One or more flags from the <c>menu_item_type_flags</c> enumeration.</param>
 		void set_type_flags(menu_item_type_flags const TypeFlags) noexcept
 		{
 			mData.fMask |= MIIM_FTYPE;
 			mData.fType = to_underlying(TypeFlags);
 		}
 
+		/// <summary>Sets the menu item state.</summary>
+		/// <param name="StateFlags">One or more flags from the <c>menu_item_state_flags</c> enumeration.</param>
 		void set_state_flags(menu_item_state_flags const StateFlags) noexcept
 		{
 			mData.fMask |= MIIM_STATE;
 			mData.fState = to_underlying(StateFlags);
 		}
 
-		// Inserts a new menu item into the menu specified by MenuHandle.
-		// The Where argument specifies the position or identifier of the menu item before which to insert the new item.
-		// If the InsertByPos argument is true, the Where argument is a position, otherwise, it is an identifier.
-		// These functions wrap the InsertMenuItemW function. For further reading, view the MSDN documentation for InsertMenuItemW.
+		/// <summary>
+		/// Inserts a new menu item described by the <c>menu_item_builder</c> into the menu specified by <c>MenuHandle</c>.
+		/// <para/>
+		/// After the insertion takes place, the <c>menu_item_builder</c> is reset such that it no longer contains state which
+		/// describes the menu item.
+		/// </summary>
+		/// <param name="MenuHandle">A handle to the menu to insert the menu item into.</param>
+		/// <param name="Where">The identifier or position of the menu item before which to insert the new item. See <paramref name="InsertByPos"/>.</param>
+		/// <param name="InsertByPos">If <c>true</c>, <paramref name="Where"/> is a position, otherwise, it is an identifier.</param>
 		void insert(_In_ HMENU const MenuHandle, std::uint16_t const Where = 0xffff, bool const InsertByPos = true)
 		{
 			check_bool(InsertMenuItemW(MenuHandle, Where, InsertByPos, &mData));
