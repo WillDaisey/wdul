@@ -35,7 +35,11 @@ namespace wdul
 		// Returns true if and only if a matching property was found and therefore had its value written to the output string.
 		bool find_value(std::u8string& Value, std::u8string_view const Key);
 
+		/// <returns><c>true</c> if and only if the <c>ini_file_reader</c> is currently open.</returns>
 		[[nodiscard]] bool is_open() const noexcept { return !!mFile; }
+
+		/// <returns>The name of the current section.</returns>
+		[[nodiscard]] std::u8string const& get_section() const noexcept { return mSection; }
 
 	private:
 		file_handle mFile;
