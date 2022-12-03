@@ -26,6 +26,13 @@ namespace wdul
 		case ERROR_ACCESS_DENIED:
 			return fopen_code::access_denied;
 
+		case ERROR_SHARING_VIOLATION:
+		case ERROR_LOCK_VIOLATION:
+			return fopen_code::in_use;
+
+		case ERROR_ALREADY_EXISTS:
+			return fopen_code::already_exists;
+
 		default:
 			throw_win32(Win32);
 		}

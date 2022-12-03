@@ -48,12 +48,13 @@ namespace wdul
 
 		// Access was denied.
 		access_denied,
-	};
 
-	namespace impl
-	{
-		_Ret_range_(!= , fopen_code::success) fopen_code to_fopen_code(std::uint32_t const Win32);
-	}
+		// Cannot access the file because it is being used or locked by another process.
+		in_use,
+
+		// Could not create the file as it already exists.
+		already_exists,
+	};
 
 	// File object access rights.
 	enum class file_access : std::uint32_t
