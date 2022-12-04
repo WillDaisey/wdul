@@ -46,7 +46,7 @@ namespace wdul
 	{
 		// Get the first non-whitespace character.
 		auto const firstCh = std::find_if_not(Node.begin(), Node.end(), ini_is_whitespace);
-		if (firstCh == Node.end() || *firstCh == u8';')
+		if (firstCh == Node.end() || *firstCh == u8';' || *firstCh == u8'#')
 		{
 			// The node is empty, contains only whitespace, or is a comment.
 			Result->type = ini_node_type::ignore;
