@@ -2,7 +2,7 @@
 // View this project on github: https://github.com/WillDaisey/wdul/
 
 #pragma once
-#include "foundation.hpp"
+#include "utility.hpp"
 #include "error.hpp"
 
 namespace wdul

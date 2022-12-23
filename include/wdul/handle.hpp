@@ -2,8 +2,8 @@
 // View this project on github: https://github.com/WillDaisey/wdul/
 
 #pragma once
-#include "foundation.hpp"
 #include "error.hpp"
+#include "debug.hpp"
 
 namespace wdul
 {
@@ -55,7 +55,13 @@ namespace wdul
 				}
 				catch (std::exception const& e)
 				{
-					WDUL_WARN("WDUL", e.what());
+					debug::output(
+						debug::categories::get_facility(),
+						debug::categories::close_handle,
+						debug::severity::warn,
+						__func__,
+						e.what()
+					);
 				}
 #else
 				traits::close(mValue);

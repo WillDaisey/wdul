@@ -159,7 +159,10 @@ namespace wdul
 		// to be closed down and restarted. The error code is given in Error.
 		void __stdcall OnCriticalError(HRESULT const Error) noexcept override
 		{
-			WDUL_WARN("WDUL", hresult_error(Error).what());
+#ifdef _DEBUG
+			debug::output(debug::categories::get_facility(), debug::categories::xaudio2, debug::severity::warn,
+				__func__, hresult_error(Error).what());
+#endif
 			try
 			{
 				throw_hresult(Error);
@@ -303,7 +306,10 @@ namespace wdul
 		// processed when the error occurred, and its HRESULT code.
 		void __stdcall OnVoiceError(void* const, HRESULT const Error) noexcept override
 		{
-			WDUL_WARN("WDUL", hresult_error(Error).what());
+#ifdef _DEBUG
+			debug::output(debug::categories::get_facility(), debug::categories::xaudio2, debug::severity::warn,
+				__func__, hresult_error(Error).what());
+#endif
 			try
 			{
 				throw_hresult(Error);

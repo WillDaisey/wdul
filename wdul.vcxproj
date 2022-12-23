@@ -167,10 +167,11 @@
     <ClInclude Include="include\wdul\d2d1.hpp" />
     <ClInclude Include="include\wdul\d3d11.hpp" />
     <ClInclude Include="include\wdul\d3d12.hpp" />
+    <ClInclude Include="include\wdul\debug.hpp" />
     <ClInclude Include="include\wdul\display.hpp" />
     <ClInclude Include="include\wdul\dxgi.hpp" />
     <ClInclude Include="include\wdul\fs.hpp" />
-    <ClInclude Include="include\wdul\foundation.hpp" />
+    <ClInclude Include="include\wdul\math.hpp" />
     <ClInclude Include="include\wdul\error.hpp" />
     <ClInclude Include="include\wdul\game_window.hpp" />
     <ClInclude Include="include\wdul\graphics_common.hpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="include\wdul\system_resource.hpp" />
     <ClInclude Include="include\wdul\thread.hpp" />
     <ClInclude Include="include\wdul\time.hpp" />
+    <ClInclude Include="include\wdul\utility.hpp" />
     <ClInclude Include="include\wdul\window.hpp" />
     <ClInclude Include="include\wdul\window_message.hpp" />
     <ClInclude Include="include\wdul\xaudio2.hpp" />
@@ -193,9 +195,9 @@
     <ClCompile Include="app_window.cpp" />
     <ClCompile Include="d3d11.cpp" />
     <ClCompile Include="d3d12.cpp" />
+    <ClCompile Include="debug.cpp" />
     <ClCompile Include="dxgi.cpp" />
     <ClCompile Include="fs.cpp" />
-    <ClCompile Include="foundation.cpp" />
     <ClCompile Include="error.cpp" />
     <ClCompile Include="game_window.cpp" />
     <ClCompile Include="ini_file.cpp" />

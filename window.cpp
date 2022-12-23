@@ -20,8 +20,7 @@ namespace wdul
 			}
 			catch (std::exception const& e)
 			{
-				OutputDebugStringA(e.what());
-				OutputDebugStringA("\n");
+				debug::output(debug::categories::get_facility(), debug::categories::window, debug::severity::warn, __func__, e.what());
 			}
 #endif
 			std::terminate();

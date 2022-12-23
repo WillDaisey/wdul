@@ -90,7 +90,7 @@
     <ClInclude Include="include\wdul\error.hpp">
       <Filter>Source Code\System</Filter>
     </ClInclude>
-    <ClInclude Include="include\wdul\foundation.hpp">
+    <ClInclude Include="include\wdul\math.hpp">
       <Filter>Source Code\System</Filter>
     </ClInclude>
     <ClInclude Include="include\wdul\handle.hpp">
@@ -109,6 +109,12 @@
       <Filter>Source Code\System</Filter>
     </ClInclude>
     <ClInclude Include="include\wdul\time.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\debug.hpp">
+      <Filter>Source Code\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wdul\utility.hpp">
       <Filter>Source Code\System</Filter>
     </ClInclude>
   </ItemGroup>
@@ -146,13 +152,13 @@
     <ClCompile Include="error.cpp">
       <Filter>Source Code\System</Filter>
     </ClCompile>
-    <ClCompile Include="foundation.cpp">
-      <Filter>Source Code\System</Filter>
-    </ClCompile>
     <ClCompile Include="media_foundation.cpp">
       <Filter>Source Code\System</Filter>
     </ClCompile>
     <ClCompile Include="strconv.cpp">
+      <Filter>Source Code\System</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
       <Filter>Source Code\System</Filter>
     </ClCompile>
   </ItemGroup>

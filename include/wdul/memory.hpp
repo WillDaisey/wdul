@@ -2,10 +2,9 @@
 // View this project on github: https://github.com/WillDaisey/wdul/
 
 #pragma once
-#include "foundation.hpp"
+#include "debug.hpp"
 #include <cstring>
 #include <new>
-#include <memory>
 #include <Windows.h>
 
 #ifndef WDUL_DEBUG_RAISE_LAST_ERROR_WHEN

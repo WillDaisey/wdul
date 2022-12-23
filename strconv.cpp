@@ -3,7 +3,7 @@
 
 #include "include/wdul/strconv.hpp"
 #include "include/wdul/error.hpp"
-#include "include/wdul/foundation.hpp"
+#include "include/wdul/debug.hpp"
 #include <stdexcept>
 
 namespace wdul::impl
@@ -16,7 +16,7 @@ namespace wdul::impl
 		{
 			if (*p == u8'\0')
 			{
-				WDUL_WARN("WDUL", Msg);
+				debug::output(debug::categories::get_facility(), debug::categories::strings, debug::severity::warn, __func__, Msg);
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 // View this project on github: https://github.com/WillDaisey/wdul/
 
 #include "include/wdul/parse.hpp"
-#include "include/wdul/foundation.hpp"
+#include "include/wdul/debug.hpp"
 
 namespace wdul
 {

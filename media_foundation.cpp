@@ -2,7 +2,7 @@
 // View this project on github: https://github.com/WillDaisey/wdul/
 
 #include "include/wdul/media_foundation.hpp"
-#include "include/wdul/foundation.hpp"
+#include "include/wdul/debug.hpp"
 
 namespace wdul
 {
@@ -42,7 +42,13 @@ namespace wdul
 		}
 		catch (std::exception const& e)
 		{
-			WDUL_WARN("WDUL", e.what());
+			debug::output(
+				debug::categories::get_facility(),
+				debug::categories::mf,
+				debug::severity::warn,
+				__func__,
+				e.what()
+			);
 		}
 #else
 		MFShutdown();
