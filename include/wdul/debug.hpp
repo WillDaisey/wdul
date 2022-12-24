@@ -150,11 +150,11 @@ namespace wdul::debug
 
 	[[nodiscard]] sink get_default_sink() noexcept;
 
+	/// <returns>The facility which WDUL uses to output debug messages.</returns>
+	[[nodiscard]] facility get_facility() noexcept;
+
 	namespace categories
 	{
-		/// <returns>The facility which WDUL uses to output debug messages.</returns>
-		[[nodiscard]] facility get_facility() noexcept;
-
 		//inline constexpr category general = 0;
 		inline constexpr category assertions = 1;
 		inline constexpr category close_handle = 2;

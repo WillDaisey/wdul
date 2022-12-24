@@ -484,7 +484,7 @@ namespace wdul::debug
 		return logger.get_default_sink();
 	}
 
-	[[nodiscard]] facility categories::get_facility() noexcept
+	[[nodiscard]] facility get_facility() noexcept
 	{
 		auto& logger = logger::get();
 		return logger.get_wdul_facility();

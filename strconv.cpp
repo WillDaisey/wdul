@@ -16,7 +16,7 @@ namespace wdul::impl
 		{
 			if (*p == u8'\0')
 			{
-				debug::output(debug::categories::get_facility(), debug::categories::strings, debug::severity::warn, __func__, Msg);
+				debug::output(debug::get_facility(), debug::categories::strings, debug::severity::warn, __func__, Msg);
 			}
 		}
 	}

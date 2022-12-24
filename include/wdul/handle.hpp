@@ -56,7 +56,7 @@ namespace wdul
 				catch (std::exception const& e)
 				{
 					debug::output(
-						debug::categories::get_facility(),
+						debug::get_facility(),
 						debug::categories::close_handle,
 						debug::severity::warn,
 						__func__,

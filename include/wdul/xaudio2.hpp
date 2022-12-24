@@ -160,7 +160,7 @@ namespace wdul
 		void __stdcall OnCriticalError(HRESULT const Error) noexcept override
 		{
 #ifdef _DEBUG
-			debug::output(debug::categories::get_facility(), debug::categories::xaudio2, debug::severity::warn,
+			debug::output(debug::get_facility(), debug::categories::xaudio2, debug::severity::warn,
 				__func__, hresult_error(Error).what());
 #endif
 			try
@@ -307,7 +307,7 @@ namespace wdul
 		void __stdcall OnVoiceError(void* const, HRESULT const Error) noexcept override
 		{
 #ifdef _DEBUG
-			debug::output(debug::categories::get_facility(), debug::categories::xaudio2, debug::severity::warn,
+			debug::output(debug::get_facility(), debug::categories::xaudio2, debug::severity::warn,
 				__func__, hresult_error(Error).what());
 #endif
 			try
