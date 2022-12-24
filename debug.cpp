@@ -47,30 +47,27 @@ namespace wdul::debug
 
 	struct category_data
 	{
-		category_data() noexcept = default;
+		category_data() noexcept
+		{
+			wdul::leave_uninitialized(uses_default_options);
+		}
 
-		explicit category_data(category_options const& Options) :
-			options(Options),
-			uses_default_options(false)
+		category_data(bool const UsesDefaultOptions, category_options const& Options) :
+			uses_default_options(UsesDefaultOptions),
+			options(Options)
 		{
 		}
 
-		explicit category_data(category_name const& Name) :
+		category_data(bool const UsesDefaultOptions, category_options const& Options, category_name const& Name) :
+			uses_default_options(UsesDefaultOptions),
+			options(Options),
 			name(Name)
 		{
 		}
 
-		category_data(category_options const& Options, category_name const& Name) :
-			options(Options),
-			name(Name),
-			uses_default_options(false)
-		{
-		}
-
+		bool uses_default_options;
 		category_options options;
 		category_name name;
-		std::uint32_t u32 = 0;
-		bool uses_default_options = true;
 	};
 
 	class facility_data
@@ -116,7 +113,9 @@ namespace wdul::debug
 
 		void set_category_options(category const Cat, category_options const& Options)
 		{
-			mCategories[Cat].options = Options;
+			auto& catdata = mCategories[Cat];
+			catdata.options = Options;
+			catdata.uses_default_options = false;
 		}
 
 		void erase_category_options(category const Cat)
@@ -141,10 +140,11 @@ namespace wdul::debug
 			auto it = mCategories.find(Cat);
 			if (it == mCategories.end())
 			{
-				mCategories.emplace(Cat, category_data(mDefaultOptions, category_name(Name)));
+				// By default, categories inherit the default category options provided by their facility.
+				mCategories.emplace(Cat, category_data(true, mDefaultOptions, category_name(Name)));
 				return;
 			}
-			mCategories[Cat].name = category_name(Name);
+			it->second.name = category_name(Name);
 		}
 
 		[[nodiscard]] category_data const* get_category_data(category const Cat) const
@@ -312,7 +312,7 @@ namespace wdul::debug
 
 			auto const& defaultOptions = fac.get_default_category_options();
 			auto const catData = fac.get_category_data(Msg.category);
-			
+
 			category_options const& workingOptions = catData ? catData->options : defaultOptions;
 
 			if (workingOptions.severity_threshold <= Msg.severity)
