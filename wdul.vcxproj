@@ -173,7 +173,6 @@
     <ClInclude Include="include\wdul\fs.hpp" />
     <ClInclude Include="include\wdul\math.hpp" />
     <ClInclude Include="include\wdul\error.hpp" />
-    <ClInclude Include="include\wdul\game_window.hpp" />
     <ClInclude Include="include\wdul\graphics_common.hpp" />
     <ClInclude Include="include\wdul\handle.hpp" />
     <ClInclude Include="include\wdul\ini_file.hpp" />
@@ -199,7 +198,6 @@
     <ClCompile Include="dxgi.cpp" />
     <ClCompile Include="fs.cpp" />
     <ClCompile Include="error.cpp" />
-    <ClCompile Include="game_window.cpp" />
     <ClCompile Include="ini_file.cpp" />
     <ClCompile Include="media_foundation.cpp" />
     <ClCompile Include="parse.cpp" />

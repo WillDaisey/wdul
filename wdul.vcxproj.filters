@@ -51,9 +51,6 @@
     <ClInclude Include="include\wdul\app_window.hpp">
       <Filter>Source Code\Window</Filter>
     </ClInclude>
-    <ClInclude Include="include\wdul\game_window.hpp">
-      <Filter>Source Code\Window</Filter>
-    </ClInclude>
     <ClInclude Include="include\wdul\graphics_common.hpp">
       <Filter>Source Code\Graphics</Filter>
     </ClInclude>
@@ -129,9 +126,6 @@
       <Filter>Source Code\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="app_window.cpp">
-      <Filter>Source Code\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="game_window.cpp">
       <Filter>Source Code\Window</Filter>
     </ClCompile>
     <ClCompile Include="window.cpp">
