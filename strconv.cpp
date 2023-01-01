@@ -26,6 +26,20 @@ namespace wdul::impl
 
 namespace wdul
 {
+	template <std::integral T>
+	std::size_t string_length_as_size_t(T const Val)
+	{
+		auto constexpr maxInt = static_cast<std::make_unsigned_t<decltype(Val)>>((std::numeric_limits<decltype(Val)>::max)());
+		if constexpr (maxInt > (std::numeric_limits<std::size_t>::max)())
+		{
+			if (static_cast<decltype(maxInt)>(Val) > (std::numeric_limits<std::size_t>::max)())
+			{
+				throw std::length_error("string too long");
+			}
+		}
+		return static_cast<std::size_t>(maxInt);
+	}
+
 	[[nodiscard]] std::wstring utf8_to_utf16(
 		_In_range_(>= , 0) std::int32_t const Size,
 		_In_reads_(Size) char8_t const* const Utf8
@@ -56,15 +70,7 @@ namespace wdul
 			throw_last_error();
 		}
 
-		if constexpr (static_cast<std::make_unsigned_t<decltype(utf16ChCount)>>((std::numeric_limits<decltype(utf16ChCount)>::max)()) > (std::numeric_limits<std::size_t>::max)())
-		{
-			if (static_cast<std::make_unsigned_t<decltype(utf16ChCount)>>(utf16ChCount) > (std::numeric_limits<std::size_t>::max)())
-			{
-				throw std::length_error("string too long");
-			}
-		}
-
-		std::wstring utf16String(static_cast<std::size_t>(utf16ChCount), WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
+		std::wstring utf16String(string_length_as_size_t(utf16ChCount), WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
 		if (MultiByteToWideChar(CP_UTF8, 0, utf8Chars, Size, utf16String.data(), utf16ChCount) == 0)
 		{
 			throw_last_error();
@@ -83,15 +89,7 @@ namespace wdul
 			throw_last_error();
 		}
 
-		if constexpr (static_cast<std::make_unsigned_t<decltype(utf16StrLen)>>((std::numeric_limits<decltype(utf16StrLen)>::max)()) > (std::numeric_limits<std::size_t>::max)())
-		{
-			if (static_cast<std::make_unsigned_t<decltype(utf16StrLen)>>(utf16StrLen) > (std::numeric_limits<std::size_t>::max)())
-			{
-				throw std::length_error("string too long");
-			}
-		}
-
-		std::wstring utf16String(static_cast<std::size_t>(utf16StrLen - 1 /*-1 for null term*/), WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
+		std::wstring utf16String(string_length_as_size_t(utf16StrLen) - 1 /*-1 for null term*/, WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
 
 		// Overwriting the null terminator with another NULL character is ok:
 		// "Modifying the past-the-end null terminator stored at data()+size() to any value other than CharT() has undefined behavior."
@@ -144,15 +142,7 @@ namespace wdul
 			throw_last_error();
 		}
 
-		if constexpr (static_cast<std::make_unsigned_t<decltype(utf8ChCount)>>((std::numeric_limits<decltype(utf8ChCount)>::max)()) > (std::numeric_limits<std::size_t>::max)())
-		{
-			if (static_cast<std::make_unsigned_t<decltype(utf8ChCount)>>(utf8ChCount) > (std::numeric_limits<std::size_t>::max)())
-			{
-				throw std::length_error("string too long");
-			}
-		}
-
-		std::u8string utf8String(static_cast<std::size_t>(utf8ChCount), WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
+		std::u8string utf8String(string_length_as_size_t(utf8ChCount), WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
 		if (WideCharToMultiByte(CP_UTF8, 0, Utf16, Size, reinterpret_cast<char*>(utf8String.data()), utf8ChCount, nullptr, nullptr) == 0)
 		{
 			throw_last_error();
@@ -170,15 +160,7 @@ namespace wdul
 			throw_last_error();
 		}
 
-		if constexpr (static_cast<std::make_unsigned_t<decltype(utf8StrLen)>>((std::numeric_limits<decltype(utf8StrLen)>::max)()) > (std::numeric_limits<std::size_t>::max)())
-		{
-			if (static_cast<std::make_unsigned_t<decltype(utf8StrLen)>>(utf8StrLen) > (std::numeric_limits<std::size_t>::max)())
-			{
-				throw std::length_error("string too long");
-			}
-		}
-
-		std::u8string utf8String(static_cast<std::size_t>(utf8StrLen - 1 /*-1 for null term*/), WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
+		std::u8string utf8String(string_length_as_size_t(utf8StrLen) - 1 /*-1 for null term*/, WDUL_DEBUG_SWITCH(L'?', 0) /*initialisation is not required*/);
 
 		// Overwriting the null terminator with another NULL character is ok:
 		// "Modifying the past-the-end null terminator stored at data()+size() to any value other than CharT() has undefined behavior."
