@@ -267,11 +267,11 @@ namespace wdul
 		std::exception_ptr mWndProcException;
 		HWND mHwnd = nullptr;
 		std::unique_ptr<app_window_handler> mHandler;
-		float mDpi;
-		vec2i mClientSizeInPixels;
-		vec2f mClientSizeInDips;
-		vec2i mMousePosInPixels;
-		vec2f mMousePosInDips;
-		WINDOWPLACEMENT mWindowPlacementRestore;
+		float mDpi{};
+		vec2i mClientSizeInPixels{};
+		vec2f mClientSizeInDips{};
+		vec2i mMousePosInPixels{};
+		vec2f mMousePosInDips{};
+		WINDOWPLACEMENT mWindowPlacementRestore{};
 	};
 }
