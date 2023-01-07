@@ -358,4 +358,16 @@ namespace wdul
 	/// <param name="Filename">Pointer to a null-terminated UTF-16 string which contains the name of the file to be opened and read.</param>
 	/// <returns>A <c>byte_array</c> containing the bytes read from the file.</returns>
 	[[nodiscard]] byte_array read_bytes(_In_z_ wchar_t const* const Filename);
+
+	/// <summary>Reads a file to an array of bytes.</summary>
+	/// <param name="Output">Reference to a <c>byte_array</c> which will contain the bytes read from the file.</param>
+	/// <param name="Filename">Pointer to a null-terminated UTF-16 string which contains the name of the file to be opened and read.</param>
+	/// <returns>
+	/// One of the following values:<para/>
+	/// <c>fopen_code::success</c><para/>
+	/// <c>fopen_code::not_found</c><para/>
+	/// <c>fopen_code::access_denied</c><para/>
+	/// <c>fopen_code::in_use</c>
+	/// </returns>
+	[[nodiscard]] fopen_code read_bytes(byte_array& Output, _In_z_ wchar_t const* const Filename);
 }

@@ -193,4 +193,32 @@ namespace wdul
 
 		return byte_array(size, data, take_ownership);
 	}
+
+	[[nodiscard]] fopen_code read_bytes(byte_array& Output, _In_z_ wchar_t const* const Filename)
+	{
+		file_handle f;
+		auto const code = fopen(f.put(), Filename, file_open_mode::open_existing, FILE_FLAG_SEQUENTIAL_SCAN, generic_access::read,
+			file_share_mode::read);
+
+		if (code != fopen_code::success)
+		{
+			return code;
+		}
+
+		auto const size = file_size_cast<std::uint32_t>(fgetsize(f.get()));
+
+		using allocator = byte_array::allocator;
+		auto data = static_cast<std::uint8_t*>(allocator::allocate(size));
+
+		auto dataDeleter = finally([&]() { allocator::deallocate_unchecked(data); });
+
+		fread(f.get(), size, data);
+
+		f.close();
+
+		dataDeleter.revoke();
+
+		Output = byte_array(size, data, take_ownership);
+		return fopen_code::success;
+	}
 }
