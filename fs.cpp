@@ -39,7 +39,7 @@ namespace wdul
 	}
 
 	[[nodiscard]] _Success_(return == fopen_code::success) fopen_code fopen(
-		_Outptr_result_nullonfailure_ HANDLE* const FileHandle,
+		_Outptr_ HANDLE* const FileHandle,
 		_In_z_ wchar_t const* const Filename,
 		file_open_mode const CreationDisposition,
 		std::uint32_t const FlagsAndAttributes,
@@ -48,7 +48,7 @@ namespace wdul
 	)
 	{
 		*FileHandle = CreateFileW(Filename, Access.underlying(), to_underlying(ShareMode), nullptr, to_underlying(CreationDisposition), FlagsAndAttributes, nullptr);
-		if (!(*FileHandle))
+		if ((*FileHandle) == file_handle::traits::invalid_value)
 		{
 			return to_fopen_code(GetLastError());
 		}

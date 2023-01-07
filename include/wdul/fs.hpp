@@ -155,7 +155,7 @@ namespace wdul
 	// Creates or opens a file or I/O device.
 	// This function wraps the CreateFileW function. For further reading, view the MSDN documentation for CreateFileW.
 	[[nodiscard]] _Success_(return == fopen_code::success) fopen_code fopen(
-		_Outptr_result_nullonfailure_ HANDLE* const FileHandle,
+		_Outptr_ HANDLE* const FileHandle,
 		_In_z_ wchar_t const* const Filename,
 		file_open_mode const CreationDisposition,
 		std::uint32_t const FlagsAndAttributes,
@@ -225,7 +225,7 @@ namespace wdul
 		auto const attributes = GetFileAttributesW(Filename);
 		return (attributes != INVALID_FILE_ATTRIBUTES) && !(attributes & FILE_ATTRIBUTE_DIRECTORY);
 	}
-	
+
 	inline std::uint32_t fread(_In_ HANDLE const FileHandle, std::uint32_t const BufferSize, _Out_writes_bytes_to_(BufferSize, return) void* Buffer)
 	{
 		DWORD bytesRead;
@@ -356,6 +356,6 @@ namespace wdul
 
 	/// <summary>Reads a file to an array of bytes.</summary>
 	/// <param name="Filename">Pointer to a null-terminated UTF-16 string which contains the name of the file to be opened and read.</param>
-	/// <returns>An array of bytes read from the file.</returns>
+	/// <returns>A <c>byte_array</c> containing the bytes read from the file.</returns>
 	[[nodiscard]] byte_array read_bytes(_In_z_ wchar_t const* const Filename);
 }
