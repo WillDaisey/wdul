@@ -23,52 +23,11 @@ namespace wdul
 		}
 	};
 
-	namespace impl
-	{
-		template <class T>
-		concept has_access_reference = requires
-		{
-			typename T::access_reference;
-		};
-
-		template <class T>
-		concept has_access_pointer = requires
-		{
-			typename T::access_pointer;
-		};
-
-		template <class T, bool = has_access_reference<T>>
-		struct access_reference_sfinae
-		{
-			using type = T::value_type&;
-		};
-
-		template <class T>
-		struct access_reference_sfinae<T, true>
-		{
-			using type = T::access_reference;
-		};
-
-		template <class T, bool = has_access_pointer<T>>
-		struct access_pointer_sfinae
-		{
-			using type = T::value_type*;
-		};
-
-		template <class T>
-		struct access_pointer_sfinae<T, true>
-		{
-			using type = T::access_pointer;
-		};
-	}
-
 	template <class ReferencerT>
 	struct referencer_traits
 	{
 		using referencer_type = ReferencerT;
 		using value_type = referencer_type::value_type;
-		//using access_pointer = impl::access_pointer_sfinae<referencer_type>::type;
-		//using access_reference = impl::access_reference_sfinae<referencer_type>::type;
 		
 		static bool constexpr nothrow_refable = std::is_nothrow_invocable_v<decltype(&referencer_type::ref), value_type*>;
 		static bool constexpr nothrow_unrefable = std::is_nothrow_invocable_v<decltype(&referencer_type::unref), value_type*>;
@@ -120,8 +79,6 @@ namespace wdul
 	public:
 		using traits = referencer_traits<ReferencerT>;
 		using value_type = traits::value_type;
-		//using access_pointer = traits::access_pointer;
-		//using access_reference = traits::access_reference;
 
 		static_assert(traits::nothrow_unrefable);
 
