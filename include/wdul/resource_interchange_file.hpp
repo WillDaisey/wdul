@@ -60,9 +60,10 @@ namespace wdul
 
 	class riff_reader
 	{
+	public:
 		riff_reader(riff_reader const&) = delete;
 		riff_reader& operator=(riff_reader const&) = delete;
-	public:
+
 		riff_reader() noexcept = default;
 
 		riff_reader(riff_reader&& Other) noexcept :

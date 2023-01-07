@@ -23,9 +23,10 @@ namespace wdul
 	// Manages a window class.
 	class window_class
 	{
+	public:
 		window_class(window_class const&) = delete;
 		window_class& operator=(window_class const&) = delete;
-	public:
+
 		explicit window_class(HINSTANCE const InstanceHandle = nullptr, std::uint16_t const Atom = 0) noexcept :
 			mInstanceHandle(InstanceHandle), mAtom(Atom)
 		{
@@ -107,11 +108,12 @@ namespace wdul
 	// Wraps the BeginPaint and EndPaint functions.
 	class window_paint_scope
 	{
+	public:
 		window_paint_scope(window_paint_scope const&) = delete;
 		window_paint_scope(window_paint_scope&&) = delete;
 		window_paint_scope& operator=(window_paint_scope const&) = delete;
 		window_paint_scope& operator=(window_paint_scope&&) = delete;
-	public:
+
 		explicit window_paint_scope(_In_ HWND const Hwnd) noexcept : mHwnd(Hwnd)
 		{
 			BeginPaint(mHwnd, &mPs);

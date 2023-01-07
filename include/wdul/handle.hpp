@@ -17,9 +17,10 @@ namespace wdul
 	template <handle_traits T>
 	class handle
 	{
+	public:
 		handle(handle const&) = delete;
 		handle& operator=(handle const&) = delete;
-	public:
+
 		using traits = T;
 		using value_type = traits::value_type;
 

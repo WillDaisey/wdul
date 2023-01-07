@@ -23,10 +23,10 @@ namespace wdul
 		template <xaudio2_voice_interface>
 		friend class voice_ptr;
 
+	public:
 		xaudio2_voice_ptr(xaudio2_voice_ptr const&) = delete;
 		xaudio2_voice_ptr& operator=(xaudio2_voice_ptr const&) = delete;
 
-	public:
 		using value_type = T;
 
 		xaudio2_voice_ptr(std::nullptr_t = nullptr) noexcept : mPtr{}
@@ -130,9 +130,10 @@ namespace wdul
 
 	class xaudio2_engine_callback : public IXAudio2EngineCallback
 	{
+	public:
 		xaudio2_engine_callback(xaudio2_engine_callback const&) = delete;
 		xaudio2_engine_callback& operator=(xaudio2_engine_callback const&) = delete;
-	public:
+
 		xaudio2_engine_callback() = default;
 		xaudio2_engine_callback(xaudio2_engine_callback&&) noexcept = default;
 		xaudio2_engine_callback& operator=(xaudio2_engine_callback&&) noexcept = default;
@@ -180,9 +181,10 @@ namespace wdul
 	template <xaudio2_engine_callback_interface T = xaudio2_engine_callback>
 	class xaudio2_engine_callback_registration
 	{
+	public:
 		xaudio2_engine_callback_registration(xaudio2_engine_callback_registration const&) = delete;
 		xaudio2_engine_callback_registration& operator=(xaudio2_engine_callback_registration const&) = delete;
-	public:
+
 		xaudio2_engine_callback_registration() noexcept :
 			mCallback{}
 		{
@@ -253,9 +255,10 @@ namespace wdul
 
 	class xaudio2_voice_callback : public IXAudio2VoiceCallback
 	{
+	public:
 		xaudio2_voice_callback(xaudio2_voice_callback const&) = delete;
 		xaudio2_voice_callback& operator=(xaudio2_voice_callback const&) = delete;
-	public:
+
 		xaudio2_voice_callback() = default;
 		xaudio2_voice_callback(xaudio2_voice_callback&&) noexcept = default;
 		xaudio2_voice_callback& operator=(xaudio2_voice_callback&&) noexcept = default;

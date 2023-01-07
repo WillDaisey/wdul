@@ -46,10 +46,11 @@ namespace wdul
 	template <cvref_unqualified T>
 	class final_act
 	{
+	public:
 		final_act(const final_act&) = delete;
 		final_act& operator=(const final_act&) = delete;
 		final_act& operator=(final_act&&) = delete;
-	public:
+
 		explicit final_act(T const Fn) noexcept : mFn(std::move(Fn)) {}
 
 		final_act(final_act&& Other) noexcept : mFn(std::move(Other.mFn)), mInvoke(std::exchange(Other.mInvoke, false))
@@ -102,11 +103,12 @@ namespace wdul
 	template <cvref_unqualified T>
 	class final_irrevocable_act
 	{
+	public:
 		final_irrevocable_act(const final_irrevocable_act&) = delete;
 		final_irrevocable_act& operator=(const final_irrevocable_act&) = delete;
 		final_irrevocable_act(final_irrevocable_act&&) = delete;
 		final_irrevocable_act& operator=(final_irrevocable_act&&) = delete;
-	public:
+
 		explicit final_irrevocable_act(T const Fn) noexcept : mFn(std::move(Fn)) {}
 
 		~final_irrevocable_act() noexcept(std::is_nothrow_invocable_v<T>)

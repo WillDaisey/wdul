@@ -13,10 +13,11 @@ namespace wdul
 
 	class critical_section
 	{
+	public:
 		critical_section(critical_section const&) = delete;
 		critical_section(critical_section&&) = delete;
 		critical_section& operator=(critical_section) = delete;
-	public:
+
 		critical_section() noexcept
 		{
 			InitializeCriticalSection(&mCs);

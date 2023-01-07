@@ -10,11 +10,12 @@ namespace wdul
 	// Wraps the CoInitializeEx and CoUninitialize functions.
 	class coinit_scope
 	{
+	public:
 		coinit_scope(const coinit_scope&) = delete;
 		coinit_scope& operator=(const coinit_scope&) = delete;
 		coinit_scope(coinit_scope&&) = delete;
 		coinit_scope& operator=(coinit_scope&&) = delete;
-	public:
+
 		explicit coinit_scope(std::uint32_t const Flags)
 		{
 			check_hresult(CoInitializeEx(nullptr, Flags));
